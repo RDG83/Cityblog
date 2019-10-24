@@ -1,0 +1,12 @@
+<h1>Welcome to the edit page</h1>
+<form action="/cities/<%=city.id%>?_method=PUT" method="POST">
+  <label for="">Name</label>
+  <input type="text" name="city[name]" id="" value="<%=city.name%>" />
+  <label for="">Population</label>
+  <input type="number" name="city[population]" id="" value="<%=city.population%>" />
+  <label for="">country</label>
+  <input type="text" name="city[country]" id="" value="<%=city.country%>" />
+  <label for="description"></label>
+  <textarea name="city[description]" id="" cols="30" rows="10"><%=city.description%></textarea>
+  <input type="submit" value="" />
+</form>

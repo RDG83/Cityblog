@@ -5,4 +5,6 @@
 <p><%= city.country %></p>
 <p><%= city.description %></p>
 
+<form id="delete" action="/cities/<%=city._id%>?_method=delete" method="post"><button>DELETE</button></form>
+<a href="/cities/<%=city._id%>/edit">Edit post</a>
 <a href="/cities">Back to main page</a>

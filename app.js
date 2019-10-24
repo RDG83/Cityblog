@@ -62,10 +62,38 @@ app.get("/cities/:id", function(req, res) {
   });
 });
 
-// })
 // EDIT
+app.get("/cities/:id/edit", function(req, res) {
+  City.findById(req.params.id, function(err, foundCity) {
+    if (err) {
+      res.redirect("/cities");
+    } else {
+      res.render("edit", { city: foundCity });
+    }
+  });
+});
+
 // UPDATE
+app.put("/cities/:id", function(req, res) {
+  City.findByIdAndUpdate(req.params.id, req.body.city, function(err, updatedCity) {
+    if (err) {
+      res.redirect("/cities");
+    } else {
+      res.redirect("/cities/" + req.params.id);
+    }
+  });
+});
+
 // DELETE
+app.delete("/cities/:id", function(req, res) {
+  City.findByIdAndDelete(req.params.id, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/cities");
+    }
+  });
+});
 
 app.get("*", function(req, res) {
   res.send("Entered an invalid path, please return to the homepage");
