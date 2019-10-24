@@ -1,0 +1,11 @@
+<h1>Welcome to the main page!</h1>
+
+<%city.forEach(function(city){%>
+<p><%=city.name%></p>
+<p><%= city.population %></p>
+<p><%= city.country %></p>
+<p><%= city.description %></p>
+<a href="/cities/<%=city._id%>"><%=city.name%></a>
+<%})%>
+
+<a href="/cities/new">Nieuwe stad aanmaken</a>
