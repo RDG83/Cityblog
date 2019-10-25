@@ -15,7 +15,7 @@ app.use(methodOverride("_method"));
 // defining mongoose Schema
 const citySchema = new mongoose.Schema({
   name: String,
-  population: Number,
+  image: String,
   country: String,
   description: String
 });

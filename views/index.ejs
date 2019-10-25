@@ -11,12 +11,12 @@
 <div class="row">
   <%city.forEach(function(city){%>
   <div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="card text-center" style="width: 18rem;">
+    <div class="card" style="width: 18rem;">
+      <img src="<%= city.image %>" class="card-img-top" alt="..." />
       <div class="card-body">
-        <h5 class="card-title"><%=city.name%></h5>
-        <p class="card-text">><%= city.description %></p>
-        <p class="card-text">><%= city.population %></p>
-        <p class="card-text">><%= city.country %></p>
+        <h5 class="card-title"><%= city.name %></h5>
+        <p class="card-text"><%= city.country %></p>
+        <p class="card-text"><%= city.description.substring(0,60) %>...</p>
         <a href="/cities/<%=city._id%>" class="btn btn-primary">More Info</a>
       </div>
     </div>
