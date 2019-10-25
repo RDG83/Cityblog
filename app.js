@@ -75,6 +75,8 @@ app.get("/cities/:id/edit", function(req, res) {
 
 // UPDATE
 app.put("/cities/:id", function(req, res) {
+  console.log(req.body.city);
+
   City.findByIdAndUpdate(req.params.id, req.body.city, function(err, updatedCity) {
     if (err) {
       res.redirect("/cities");
@@ -98,6 +100,10 @@ app.delete("/cities/:id", function(req, res) {
 app.get("*", function(req, res) {
   res.send("You entered a wrond path, please return to the homepage");
 });
+
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$!#\s]/g, "\\$&");
+}
 
 app.listen(3000);
 console.log("server is now live and listening at port 3000");

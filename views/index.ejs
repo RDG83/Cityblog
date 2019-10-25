@@ -7,16 +7,24 @@
   </p>
   <a class="btn btn-primary btn-lg" href="/cities/new" role="button">Add a city</a>
 </div>
+
+<!-- SEARCH -->
+
+<form action="/cities" method="GET" class="form-inline my-2 my-lg-0">
+  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" />
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>
+
 <!-- CARDS -->
 <div class="row">
   <%city.forEach(function(city){%>
   <div class="col-xs-12 col-sm-6 col-md-4">
-    <div class="card" style="width: 18rem;">
+    <div class="card my-2" style="width: 18rem;">
       <img src="<%= city.image %>" class="card-img-top" alt="..." />
       <div class="card-body">
         <h5 class="card-title"><%= city.name %></h5>
         <p class="card-text"><%= city.country %></p>
-        <p class="card-text"><%= city.description.substring(0,60) %>...</p>
+        <p class="card-text d-none d-md-flex"><%= city.description.substring(0,60) %>...</p>
         <a href="/cities/<%=city._id%>" class="btn btn-primary">More Info</a>
       </div>
     </div>

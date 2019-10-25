@@ -1,13 +1,15 @@
 <% include ./partials/header %>
-<h1>This is the show page!</h1>
+<div class="container-fluid mb-3">
+  <h4 class="text-center d-sm-none"><%=city.name%></h4>
+  <h1 class="text-center d-none d-sm-block"><%=city.name%></h1>
+  <h4 class="text-center d-none d-sm-block"><%= city.country %></h4>
+  <img class="img-fluid mx-auto d-block" src="<%= city.image %>" alt="" srcset="" />
+  <p></p>
+  <p><%= city.description %></p>
 
-<p><%=city.name%></p>
-<p><%= city.image %></p>
-<p><%= city.country %></p>
-<p><%= city.description %></p>
-
-<form id="delete" action="/cities/<%=city._id%>?_method=delete" method="post"><button>DELETE</button></form>
-<a href="/cities/<%=city._id%>/edit">Edit post</a>
-<a href="/cities">Back to main page</a>
+  <div class="row text-center">
+    <a class="btn btn-primary mx-2" href="/cities/<%=city._id%>/edit">Edit</a>
+  </div>
+</div>
 
 <% include ./partials/footer %>
