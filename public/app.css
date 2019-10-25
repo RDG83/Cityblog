@@ -1,4 +1,12 @@
-.item{
- border: 1px solid black;
- text-align: center;
+.item {
+  border: 1px solid black;
+  text-align: center;
+}
+
+.jumbotron {
+  background-image: url("https://images.pexels.com/photos/7613/pexels-photo.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+}
+
+#navbarcol {
+  background-color: #0069d9;
 }

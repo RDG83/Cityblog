@@ -22,13 +22,13 @@ const citySchema = new mongoose.Schema({
 
 var City = mongoose.model("City", citySchema);
 
-app.get("/", function (req, res) {
+app.get("/", function(req, res) {
   res.redirect("/cities");
 });
 
 // INDEX
-app.get("/cities", function (req, res) {
-  City.find({}, function (err, city) {
+app.get("/cities", function(req, res) {
+  City.find({}, function(err, city) {
     if (err) {
       console.log(err);
     } else res.render("index", { city: city });
@@ -36,13 +36,13 @@ app.get("/cities", function (req, res) {
 });
 
 // NEW
-app.get("/cities/new", function (req, res) {
+app.get("/cities/new", function(req, res) {
   res.render("new");
 });
 
 // CREATE
-app.post("/cities", function (req, res) {
-  City.create(req.body.city, function (err, newCity) {
+app.post("/cities", function(req, res) {
+  City.create(req.body.city, function(err, newCity) {
     if (err) {
       console.log(err);
     } else {
@@ -52,8 +52,8 @@ app.post("/cities", function (req, res) {
 });
 
 // SHOW
-app.get("/cities/:id", function (req, res) {
-  City.findById(req.params.id, function (err, foundCity) {
+app.get("/cities/:id", function(req, res) {
+  City.findById(req.params.id, function(err, foundCity) {
     if (err) {
       console.log(err);
     } else {
@@ -63,8 +63,8 @@ app.get("/cities/:id", function (req, res) {
 });
 
 // EDIT
-app.get("/cities/:id/edit", function (req, res) {
-  City.findById(req.params.id, function (err, foundCity) {
+app.get("/cities/:id/edit", function(req, res) {
+  City.findById(req.params.id, function(err, foundCity) {
     if (err) {
       res.redirect("/cities");
     } else {
@@ -74,8 +74,8 @@ app.get("/cities/:id/edit", function (req, res) {
 });
 
 // UPDATE
-app.put("/cities/:id", function (req, res) {
-  City.findByIdAndUpdate(req.params.id, req.body.city, function (err, updatedCity) {
+app.put("/cities/:id", function(req, res) {
+  City.findByIdAndUpdate(req.params.id, req.body.city, function(err, updatedCity) {
     if (err) {
       res.redirect("/cities");
     } else {
@@ -85,8 +85,8 @@ app.put("/cities/:id", function (req, res) {
 });
 
 // DELETE
-app.delete("/cities/:id", function (req, res) {
-  City.findByIdAndDelete(req.params.id, function (err) {
+app.delete("/cities/:id", function(req, res) {
+  City.findByIdAndDelete(req.params.id, function(err) {
     if (err) {
       console.log(err);
     } else {
@@ -95,7 +95,7 @@ app.delete("/cities/:id", function (req, res) {
   });
 });
 
-app.get("*", function (req, res) {
+app.get("*", function(req, res) {
   res.send("You entered a wrond path, please return to the homepage");
 });
 

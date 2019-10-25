@@ -1,23 +1,27 @@
 <% include ./partials/header %>
-<h1>Welcome to the main page!</h1>
-
-<div class="row">
- <%city.forEach(function(city){%>
- <div class="col-xs-12 col-sm-6 col-md-4">
-  <div class="item">
-   <p><%=city.name%></p>
-   <p><%= city.population %></p>
-   <p><%= city.country %></p>
-   <p><%= city.description %></p>
-   <a class="btn btn-primary" href="/cities/<%=city._id%>">More Info</a>
-  </div>
- </div>
- <%})%>
+<!-- JUMBOTRON -->
+<div class="jumbotron my-3">
+  <h1 class="display-4">City Database</h1>
+  <p class="lead d-none d-sm-flex">
+    Find out everything you want to know about your favorite city.
+  </p>
+  <a class="btn btn-primary btn-lg" href="/cities/new" role="button">Add a city</a>
 </div>
-
-
-
-
-<a href="/cities/new">Nieuwe stad aanmaken</a>
+<!-- CARDS -->
+<div class="row">
+  <%city.forEach(function(city){%>
+  <div class="col-xs-12 col-sm-6 col-md-4">
+    <div class="card text-center" style="width: 18rem;">
+      <div class="card-body">
+        <h5 class="card-title"><%=city.name%></h5>
+        <p class="card-text">><%= city.description %></p>
+        <p class="card-text">><%= city.population %></p>
+        <p class="card-text">><%= city.country %></p>
+        <a href="/cities/<%=city._id%>" class="btn btn-primary">More Info</a>
+      </div>
+    </div>
+  </div>
+  <%})%>
+</div>
 
 <% include ./partials/footer %>
