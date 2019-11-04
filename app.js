@@ -4,6 +4,14 @@ const app = express();
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+
+const indexRoutes = require("./routes/index");
+const cityRoutes = require("./routes/cities");
+const citycommentRoutes = require("./routes/citycomment");
+const sightRoutes = require("./routes/sights");
+const sightcommentRoutes = require("./routes/sightcomment");
 
 // Config apps
 mongoose.connect("mongodb://localhost/Citydb", { useNewUrlParser: true, useUnifiedTopology: true });
@@ -12,98 +20,16 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
-// defining mongoose Schema
-const citySchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  country: String,
-  description: String
-});
-
-var City = mongoose.model("City", citySchema);
-
-app.get("/", function(req, res) {
-  res.redirect("/cities");
-});
-
-// INDEX
-app.get("/cities", function(req, res) {
-  City.find({}, function(err, city) {
-    if (err) {
-      console.log(err);
-    } else res.render("index", { city: city });
-  });
-});
-
-// NEW
-app.get("/cities/new", function(req, res) {
-  res.render("new");
-});
-
-// CREATE
-app.post("/cities", function(req, res) {
-  City.create(req.body.city, function(err, newCity) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/cities");
-    }
-  });
-});
-
-// SHOW
-app.get("/cities/:id", function(req, res) {
-  City.findById(req.params.id, function(err, foundCity) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("show", { city: foundCity });
-    }
-  });
-});
-
-// EDIT
-app.get("/cities/:id/edit", function(req, res) {
-  City.findById(req.params.id, function(err, foundCity) {
-    if (err) {
-      res.redirect("/cities");
-    } else {
-      res.render("edit", { city: foundCity });
-    }
-  });
-});
-
-// UPDATE
-app.put("/cities/:id", function(req, res) {
-  console.log(req.body.city);
-
-  City.findByIdAndUpdate(req.params.id, req.body.city, function(err, updatedCity) {
-    if (err) {
-      res.redirect("/cities");
-    } else {
-      res.redirect("/cities/" + req.params.id);
-    }
-  });
-});
-
-// DELETE
-app.delete("/cities/:id", function(req, res) {
-  City.findByIdAndDelete(req.params.id, function(err) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.redirect("/cities");
-    }
-  });
-});
+app.use(indexRoutes);
+app.use("/cities", cityRoutes);
+app.use("/cities/:id/comments", citycommentRoutes);
+app.use("/cities/:id/sights", sightRoutes);
+app.use("/cities/:id/sights/:id/sightcomments", sightcommentRoutes);
 
 app.get("*", function(req, res) {
-  res.send("You entered a wrond path, please return to the homepage");
+  res.send("You entered a wrong path, please return to the homepage");
 });
 
-function escapeRegex(text) {
-  return text.replace(/[-[\]{}()*+?.,\\^$!#\s]/g, "\\$&");
-}
-
-app.listen(3000);
-console.log("server is now live and listening at port 3000");
+const port = process.env.port || 3000;
+app.listen(port);
+console.log("server is now live and listening at port: " + port);
