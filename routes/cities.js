@@ -7,13 +7,19 @@ router.get("/", function(req, res) {
   City.find({}, function(err, city) {
     if (err) {
       console.log(err);
-    } else res.render("index", { city: city });
+    } else res.render("cities/index", { city: city });
   });
 });
 
 // NEW
 router.get("/new", function(req, res) {
-  res.render("new");
+  City.findById(req.params.id, function(err, foundCity) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("cities/new", { city: foundCity });
+    }
+  });
 });
 
 // CREATE
@@ -33,7 +39,7 @@ router.get("/:id", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render("show", { city: foundCity });
+      res.render("cities/show", { city: foundCity });
     }
   });
 });
@@ -44,7 +50,7 @@ router.get("/:id/edit", function(req, res) {
     if (err) {
       res.redirect("/cities");
     } else {
-      res.render("edit", { city: foundCity });
+      res.render("cities/edit", { city: foundCity });
     }
   });
 });

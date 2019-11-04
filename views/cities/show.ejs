@@ -1,4 +1,4 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
 <div class="container-fluid mb-3">
   <h4 class="text-center d-sm-none"><%=city.name%></h4>
   <h1 class="text-center d-none d-sm-block"><%=city.name%></h1>
@@ -12,4 +12,6 @@
   </div>
 </div>
 
-<% include ./partials/footer %>
+<a class="btn btn-primary" href="/cities/<%=city._id%>/sights/new">Add a Sight</a>
+
+<% include ../partials/footer %>

@@ -1,4 +1,4 @@
-<% include ./partials/header %>
+<% include ../partials/header %>
 <h1>Welcome to the edit page</h1>
 <form class="ui form" action="/cities/<%= city._id%>?_method=PUT" method="POST">
   <div class="form-group row">
@@ -34,4 +34,4 @@
 <form id="delete" action="/cities/<%=city._id%>?_method=delete" method="post">
   <button class="btn btn-primary">Delete</button>
 </form>
-<% include ./partials/footer %>
+<% include ../partials/footer %>

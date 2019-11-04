@@ -6,7 +6,7 @@ const sightSchema = new mongoose.Schema({
   description: String,
   author: {
     id: {
-      type: mongoose.Schema.Type.Objectid,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User"
     }
   },
