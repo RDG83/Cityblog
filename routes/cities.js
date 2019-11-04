@@ -17,7 +17,7 @@ router.get("/new", function(req, res) {
 });
 
 // CREATE
-router.post("/cities", function(req, res) {
+router.post("/", function(req, res) {
   City.create(req.body.city, function(err, newCity) {
     if (err) {
       console.log(err);
