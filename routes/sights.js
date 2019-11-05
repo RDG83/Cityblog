@@ -30,12 +30,12 @@ router.post("/", function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          sight.author.id = req.user.id;
-          sight.author.username = req.user.username;
+          // sight.author.id = req.user.id;
+          // sight.author.username = req.user.username;
           sight.save();
-          city.sight.push(sight);
+          city.sights.push(sight);
           city.save();
-          res.redirect("/cities");
+          res.redirect("/cities/" + city._id);
         }
       });
     }

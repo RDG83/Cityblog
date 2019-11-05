@@ -20,6 +20,42 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
+passport.use(
+  new LocalStrategy(function(username, password, done) {
+    User.findOne({ username: username }, function(err, user) {
+      if (err) {
+        return done(err);
+      }
+      if (!user) {
+        return done(null, false);
+      }
+      if (!user.verifyPassword(password)) {
+        return done(null, false);
+      }
+      return done(null, user);
+    });
+  })
+);
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+app.use(require("express-session")({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(function(req, res, next) {
+  res.locals.currentUser = req.user;
+  next();
+});
+
 app.use(indexRoutes);
 app.use("/cities", cityRoutes);
 app.use("/cities/:id/comments", citycommentRoutes);

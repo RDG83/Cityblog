@@ -35,13 +35,16 @@ router.post("/", function(req, res) {
 
 // SHOW
 router.get("/:id", function(req, res) {
-  City.findById(req.params.id, function(err, foundCity) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("cities/show", { city: foundCity });
-    }
-  });
+  City.findById(req.params.id)
+    .populate("sights")
+    .exec(function(err, foundCity) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(foundCity);
+        res.render("cities/show", { city: foundCity });
+      }
+    });
 });
 
 // EDIT

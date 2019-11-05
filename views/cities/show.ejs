@@ -12,6 +12,12 @@
   </div>
 </div>
 
+<% city.sights.forEach(function(sight) { %>
+<p><%=sight.name%></p>
+<img src="<%=sight.image%>" alt="" />
+<p><%=sight.description%></p>
+<%})%>
+
 <a class="btn btn-primary" href="/cities/<%=city._id%>/sights/new">Add a Sight</a>
 
 <% include ../partials/footer %>
