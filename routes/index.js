@@ -1,6 +1,7 @@
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 const passport = require("passport");
+const User = require("../models/user");
 
 router.get("/", function(req, res) {
   res.render("landing");
@@ -8,6 +9,19 @@ router.get("/", function(req, res) {
 
 router.get("/signup", function(req, res) {
   res.render("signup");
+});
+
+router.post("/signup", function(req, res) {
+  User.register(new User({ username: req.body.username }), req.body.password, function(err, user) {
+    if (err) {
+      console.log(err);
+      res.redirect("/signup");
+    } else {
+      passport.authenticate("local")(req, res, function() {
+        res.redirect("/cities");
+      });
+    }
+  });
 });
 
 router.get("/login", function(req, res) {

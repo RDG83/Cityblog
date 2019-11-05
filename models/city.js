@@ -15,7 +15,7 @@ const citySchema = new mongoose.Schema({
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Citycomment"
+      ref: "Comment"
     }
   ],
   sights: [

@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
+passportLocalMongoose = require("passport-local-mongoose");
 
-const userSchema = new mongoose.Schema(
-  {
-    username: { type: String, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, "is invalid"], index: true },
-    password: String,
-    email: { type: String, lowercase: true, required: [true, "can't be blank"], match: [/\S+@\S+\.\S+/, "is invalid"], index: true },
-    bio: String,
-    image: String,
-    isAdmin: { type: Boolean, default: false }
-  },
-  { timestamps: true }
-);
+const userSchema = new mongoose.Schema({
+  username: String,
+  password: String,
+  email: String,
+  bio: String,
+  image: String,
+  isAdmin: { type: Boolean, default: false }
+});
+
+userSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model("User", userSchema);
