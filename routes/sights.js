@@ -2,10 +2,16 @@ const express = require("express");
 const router = express.Router({ mergeParams: true });
 const Sight = require("../models/sight");
 const City = require("../models/city");
+const Comment = require("../models/comment");
+const middleware = require("../middleware");
 
 // INDEX ROUTE
 router.get("/", function(req, res) {
-  res.render("sights/index");
+  Sight.find({}, function(err, sight) {
+    if (err) {
+      console.log(err);
+    } else res.render("sights/index", { sight: sight });
+  });
 });
 
 // NEW ROUTE
@@ -30,8 +36,8 @@ router.post("/", function(req, res) {
         if (err) {
           console.log(err);
         } else {
-          // sight.author.id = req.user.id;
-          // sight.author.username = req.user.username;
+          sight.author.id = req.user.id;
+          sight.author.username = req.user.username;
           sight.save();
           city.sights.push(sight);
           city.save();
@@ -43,6 +49,17 @@ router.post("/", function(req, res) {
 });
 
 // SHOW ROUTE
+router.get("/:id", middleware.isLoggedIn, function(req, res) {
+  Sight.findById(req.params.id)
+    .populate("comments")
+    .exec(function(err, foundSight) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("sights/show", { sight: foundSight });
+      }
+    });
+});
 
 // EDIT ROUTE
 

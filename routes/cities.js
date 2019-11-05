@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router({ mergeParams: true });
 const City = require("../models/city");
+const middleware = require("../middleware");
 
 // INDEX
 router.get("/", function(req, res) {
@@ -12,7 +13,7 @@ router.get("/", function(req, res) {
 });
 
 // NEW
-router.get("/new", function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
   City.findById(req.params.id, function(err, foundCity) {
     if (err) {
       console.log(err);
@@ -23,7 +24,7 @@ router.get("/new", function(req, res) {
 });
 
 // CREATE
-router.post("/", function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
   City.create(req.body.city, function(err, newCity) {
     if (err) {
       console.log(err);
@@ -34,7 +35,7 @@ router.post("/", function(req, res) {
 });
 
 // SHOW
-router.get("/:id", function(req, res) {
+router.get("/:id", middleware.isLoggedIn, function(req, res) {
   City.findById(req.params.id)
     .populate("sights")
     .exec(function(err, foundCity) {
@@ -48,7 +49,7 @@ router.get("/:id", function(req, res) {
 });
 
 // EDIT
-router.get("/:id/edit", function(req, res) {
+router.get("/:id/edit", middleware.isLoggedIn, function(req, res) {
   City.findById(req.params.id, function(err, foundCity) {
     if (err) {
       res.redirect("/cities");
@@ -59,7 +60,7 @@ router.get("/:id/edit", function(req, res) {
 });
 
 // UPDATE
-router.put("/:id", function(req, res) {
+router.put("/:id", middleware.isLoggedIn, function(req, res) {
   console.log(req.body.city);
 
   City.findByIdAndUpdate(req.params.id, req.body.city, function(err, updatedCity) {
@@ -72,7 +73,7 @@ router.put("/:id", function(req, res) {
 });
 
 // DELETE
-router.delete("/:id", function(req, res) {
+router.delete("/:id", middleware.isLoggedIn, function(req, res) {
   City.findByIdAndDelete(req.params.id, function(err) {
     if (err) {
       console.log(err);

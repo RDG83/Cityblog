@@ -1,1 +1,16 @@
 <h1>Welcome to the sights of...</h1>
+
+<div class="row">
+  <%sight.forEach(function(sight){%>
+  <div class="col-xs-12 col-sm-6 col-md-4">
+    <div class="card my-2" style="width: 18rem;">
+      <img src="<%= sight.image %>" class="card-img-top" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title"><%= sight.name %></h5>
+        <p class="card-text d-none d-md-flex"><%= sight.description.substring(0,60) %>...</p>
+        <a href="/cities/<%=sight._id%>" class="btn btn-primary">More Info</a>
+      </div>
+    </div>
+  </div>
+  <%})%>
+</div>
