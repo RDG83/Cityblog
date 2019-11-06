@@ -1,7 +1,7 @@
-<h1>Welcome to the sights of...</h1>
+<h1>Welcome to the sights of: <%=city.name%></h1>
 
 <div class="row">
-  <%sight.forEach(function(sight){%>
+  <%city.sights.forEach(function(sight){%>
   <div class="col-xs-12 col-sm-6 col-md-4">
     <div class="card my-2" style="width: 18rem;">
       <img src="<%= sight.image %>" class="card-img-top" alt="..." />

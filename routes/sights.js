@@ -7,11 +7,15 @@ const middleware = require("../middleware");
 
 // INDEX ROUTE
 router.get("/", function(req, res) {
-  Sight.find({}, function(err, sight) {
-    if (err) {
-      console.log(err);
-    } else res.render("sights/index", { sight: sight });
-  });
+  City.findById(req.params.id)
+    .populate("sights")
+    .exec(function(err, foundCity) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("sights/index", { city: foundCity });
+      }
+    });
 });
 
 // NEW ROUTE
@@ -72,7 +76,7 @@ router.get("/:sight_id/edit", function(req, res) {
 });
 
 // UPDATE ROUTE
-router.post("/:sight_id/edit", function(req, res) {
+router.put("/:sight_id", function(req, res) {
   Sight.findByIdAndUpdate(req.params.sight_id, req.body.sight, function(err, updatedSight) {
     if (err) {
       console.log(err);
@@ -83,5 +87,14 @@ router.post("/:sight_id/edit", function(req, res) {
 });
 
 // DELETE ROUTE
+router.delete("/:sight_id", function(req, res) {
+  Sight.findByIdAndRemove(req.params.sight_id, function(err) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/cities/" + req.params.id + "/sights");
+    }
+  });
+});
 
 module.exports = router;
