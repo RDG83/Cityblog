@@ -42,7 +42,6 @@ router.get("/:id", middleware.isLoggedIn, function(req, res) {
       if (err) {
         console.log(err);
       } else {
-        console.log(foundCity);
         res.render("cities/show", { city: foundCity });
       }
     });
@@ -61,8 +60,6 @@ router.get("/:id/edit", middleware.isLoggedIn, function(req, res) {
 
 // UPDATE
 router.put("/:id", middleware.isLoggedIn, function(req, res) {
-  console.log(req.body.city);
-
   City.findByIdAndUpdate(req.params.id, req.body.city, function(err, updatedCity) {
     if (err) {
       res.redirect("/cities");

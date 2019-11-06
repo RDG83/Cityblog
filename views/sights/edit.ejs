@@ -1,0 +1,8 @@
+<h1>EDIT SIGHT PAGE</h1>
+
+<form action="/cities/<%=city_id%>/sights/<%=sight._id%>/edit" method="POST">
+  <input type="text" name="sight[name]" id="" value="<%=sight.name%>" />
+  <input type="text" name="sight[image]" id="" value="<%=sight.image%>" />
+  <input type="text" name="sight[description]" id="" value="<%=sight.description%>" />
+  <input type="submit" value="Submit" />
+</form>

@@ -49,21 +49,38 @@ router.post("/", function(req, res) {
 });
 
 // SHOW ROUTE
-router.get("/:id", middleware.isLoggedIn, function(req, res) {
-  Sight.findById(req.params.id)
-    .populate("comments")
-    .exec(function(err, foundSight) {
-      if (err) {
-        console.log(err);
-      } else {
-        res.render("sights/show", { sight: foundSight });
-      }
-    });
+router.get("/:sight_id", middleware.isLoggedIn, function(req, res) {
+  Sight.findById(req.params.sight_id, function(err, foundSight) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.render("sights/show", { city_id: req.params.id, sight: foundSight });
+    }
+  });
 });
 
 // EDIT ROUTE
+router.get("/:sight_id/edit", function(req, res) {
+  Sight.findById(req.params.sight_id, function(err, foundSight) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log(foundSight);
+      res.render("sights/edit", { city_id: req.params.id, sight: foundSight });
+    }
+  });
+});
 
 // UPDATE ROUTE
+router.post("/:sight_id/edit", function(req, res) {
+  Sight.findByIdAndUpdate(req.params.sight_id, req.body.sight, function(err, updatedSight) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/cities/" + req.params.id + "/sights/" + req.params.sight_id);
+    }
+  });
+});
 
 // DELETE ROUTE
 
