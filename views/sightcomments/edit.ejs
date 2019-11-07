@@ -1,0 +1,6 @@
+<h1>Edit comment:</h1>
+
+<form action="/cities/<%=city_id%>/sights/<%=sight_id%>/comments/<%=comment._id%>?_method=put" method="post">
+  <input type="text" name="comment[text]" placeholder="text" value="<%=comment.text%>" />
+  <input type="submit" value="Submit" />
+</form>

@@ -46,21 +46,21 @@ router.get("/:comment_id/edit", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render("sightcomments/edit", { sight_id: req.params.sight_id, comment: comment });
+      res.render("sightcomments/edit", { sight_id: req.params.sight_id, city_id: req.params.id, comment: comment });
     }
   });
 });
 
 // // UPDATE
-// router.put("/:comment_id", function(req, res) {
-//   Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, comment) {
-//     if (err) {
-//       console.log(err);
-//     } else {
-//       res.redirect("/cities/" + req.params.id);
-//     }
-//   });
-// });
+router.put("/:comment_id", function(req, res) {
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(err, comment) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/cities/" + req.params.id + "/sights/" + req.params.sight_id);
+    }
+  });
+});
 
 // // DELETE
 // router.delete("/:comment_id", function(req, res) {
