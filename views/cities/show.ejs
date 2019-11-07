@@ -19,6 +19,7 @@
 <div class="row">
   <div class="col-6">
     <% city.sights.forEach(function(sight) { %>
+    <p><%=sight.author.username%></p>
     <p><%=sight.name%></p>
     <img src="<%=sight.image%>" alt="" />
     <p><%=sight.description%></p>
@@ -27,7 +28,11 @@
   </div>
   <div class="col-6">
     <% city.comments.forEach(function(comment) { %>
+    <p><%=comment.author.username%></p>
     <p><%=comment.text%></p>
+    <div>
+      <a class="btn btn-primary" href="/cities/<%=city._id%>/comments/<%=comment._id%>/edit">Edit</a>
+    </div>
     <% }) %>
   </div>
 </div>

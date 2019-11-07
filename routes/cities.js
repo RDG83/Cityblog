@@ -25,6 +25,13 @@ router.get("/new", middleware.isLoggedIn, function(req, res) {
 
 // CREATE
 router.post("/", middleware.isLoggedIn, function(req, res) {
+  let author = {
+    author: {
+      id: req.user._id,
+      username: req.user.username
+    }
+  };
+  Object.assign(req.body.city, author);
   City.create(req.body.city, function(err, newCity) {
     if (err) {
       console.log(err);
