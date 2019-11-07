@@ -4,8 +4,17 @@
   <img class="img-fluid mx-auto d-block" src="<%= sight.image %>" alt="" srcset="" />
   <p></p>
   <p><%= sight.description %></p>
+  <a href="/cities/<%-city_id%>/sights/<%=sight._id%>/comments/new">Add a comment</a>
+  <div class="row">
+    <div class="col-6">
+      <% sight.comments.forEach(function(comment) { %>
+      <p><%=comment.author.username%></p>
+      <p><%=comment.text%></p>
+      <%})%>
+    </div>
 
-  <div class="row text-center">
-    <a class="btn btn-primary mx-2" href="/cities/<%-city_id%>/sights/<%=sight._id%>/edit">Edit</a>
+    <div class="row text-center">
+      <a class="btn btn-primary mx-2" href="/cities/<%-city_id%>/sights/<%=sight._id%>/edit">Edit</a>
+    </div>
   </div>
 </div>
