@@ -16,9 +16,20 @@
 <a class="btn btn-primary" href="/cities/<%=city._id%>/sights/new">Add a Sight</a>
 <a class="btn btn-success" href="/cities/<%=city._id%>/sights">All sights</a>
 
-<% city.sights.forEach(function(sight) { %>
-<p><%=sight.name%></p>
-<img src="<%=sight.image%>" alt="" />
-<p><%=sight.description%></p>
-<a href="/cities/<%=city._id%>/sights/<%=sight._id%>">Show Sight</a>
-<%})%> <% include ../partials/footer %>
+<div class="row">
+  <div class="col-6">
+    <% city.sights.forEach(function(sight) { %>
+    <p><%=sight.name%></p>
+    <img src="<%=sight.image%>" alt="" />
+    <p><%=sight.description%></p>
+    <a href="/cities/<%=city._id%>/sights/<%=sight._id%>">Show Sight</a>
+    <%})%>
+  </div>
+  <div class="col-6">
+    <% city.comments.forEach(function(comment) { %>
+    <p><%=comment.text%></p>
+    <% }) %>
+  </div>
+</div>
+
+<% include ../partials/footer %>

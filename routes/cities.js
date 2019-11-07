@@ -38,6 +38,7 @@ router.post("/", middleware.isLoggedIn, function(req, res) {
 router.get("/:id", middleware.isLoggedIn, function(req, res) {
   City.findById(req.params.id)
     .populate("sights")
+    .populate("comments")
     .exec(function(err, foundCity) {
       if (err) {
         console.log(err);
