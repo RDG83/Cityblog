@@ -60,5 +60,14 @@ router.put("/:comment_id", function(req, res) {
 });
 
 // DELETE
+router.delete("/:comment_id", function(req, res) {
+  Comment.findByIdAndDelete(req.params.comment_id, function(err, comment) {
+    if (err) {
+      console.log(err);
+    } else {
+      res.redirect("/cities/" + req.params.id);
+    }
+  });
+});
 
 module.exports = router;
