@@ -12,15 +12,13 @@
   </div>
 </div>
 
+<a class="btn btn-primary" href="/cities/<%-city._id%>/comments/new">Add a comment</a>
+<a class="btn btn-primary" href="/cities/<%=city._id%>/sights/new">Add a Sight</a>
+<a class="btn btn-success" href="/cities/<%=city._id%>/sights">All sights</a>
+
 <% city.sights.forEach(function(sight) { %>
 <p><%=sight.name%></p>
 <img src="<%=sight.image%>" alt="" />
 <p><%=sight.description%></p>
 <a href="/cities/<%=city._id%>/sights/<%=sight._id%>">Show Sight</a>
-<%})%>
-
-<a class="btn btn-primary" href="/cities/<%=city._id%>/sights/new">Add a Sight</a>
-
-<a class="btn btn-succes" href="/cities/<%=city._id%>/sights">All sights</a>
-
-<% include ../partials/footer %>
+<%})%> <% include ../partials/footer %>

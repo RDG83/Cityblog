@@ -45,7 +45,7 @@ app.use(indexRoutes);
 app.use("/cities", cityRoutes);
 app.use("/cities/:id/comments", citycommentRoutes);
 app.use("/cities/:id/sights", sightRoutes);
-app.use("/cities/:id/sights/:id/comments", sightcommentRoutes);
+app.use("/cities/:id/sights/:sight_id/comments", sightcommentRoutes);
 
 app.get("*", function(req, res) {
   res.send("You entered a wrong path, please return to the homepage");
