@@ -7,8 +7,9 @@
   <a href="/cities/<%-city_id%>/sights/<%=sight._id%>/comments/new">Add a comment</a>
   <div class="row">
     <div class="col-6">
-      <% sight.comments.forEach(function(comment) { %>
+      <% sight.comments.forEach(function(comment) { %> <%if(comment.author){%>
       <p><%=comment.author.username%></p>
+      <%}%>
       <p><%=comment.text%></p>
       <%})%>
     </div>

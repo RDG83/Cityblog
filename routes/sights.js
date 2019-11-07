@@ -54,13 +54,15 @@ router.post("/", function(req, res) {
 
 // SHOW ROUTE
 router.get("/:sight_id", middleware.isLoggedIn, function(req, res) {
-  Sight.findById(req.params.sight_id, function(err, foundSight) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.render("sights/show", { city_id: req.params.id, sight: foundSight });
-    }
-  });
+  Sight.findById(req.params.sight_id)
+    .populate("comments")
+    .exec(function(err, foundSight) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.render("sights/show", { city_id: req.params.id, sight: foundSight });
+      }
+    });
 });
 
 // EDIT ROUTE
