@@ -1,3 +1,5 @@
+<% include ../partials/header %>
+
 <h1>EDIT SIGHT PAGE</h1>
 
 <form action="/cities/<%=city_id%>/sights/<%=sight._id%>?_method=put" method="POST">
@@ -9,3 +11,5 @@
 <form action="/cities/<%=city_id%>/sights/<%=sight._id%>?_method=delete" method="post">
   <button>Delete</button>
 </form>
+
+<% include ../partials/footer %>

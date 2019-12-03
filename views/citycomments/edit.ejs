@@ -1,3 +1,6 @@
+<% include ../partials/header %>
+
+
 <h1>Edit comment:</h1>
 
 <form action="/cities/<%=city_id%>/comments/<%=comment.id%>?_method=PUT" method="POST">
@@ -7,3 +10,5 @@
 <form action="/cities/<%=city_id%>/comments/<%=comment.id%>?_method=DELETE" method="POST">
   <button class="btn btn-primary">Delete</button>
 </form>
+
+<% include ../partials/footer %>

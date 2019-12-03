@@ -1,6 +1,11 @@
+<% include ../partials/header %>
+
+
 <h1>Add a comment for: <%=sight.name%></h1>
 
 <form action="/cities/<%=city_id%>/sights/<%=sight._id%>/comments" method="post">
   <input type="text" name="comment[text]" placeholder="text" />
   <input type="submit" value="Submit" />
 </form>
+
+<% include ../partials/footer %>
