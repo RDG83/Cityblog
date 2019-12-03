@@ -1,4 +1,5 @@
 // dependencies
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
@@ -14,8 +15,14 @@ const citycommentRoutes = require("./routes/citycomment");
 const sightcommentRoutes = require("./routes/sightcomment");
 const sightRoutes = require("./routes/sights");
 
+// Connecting to DB
+mongoose.connect(process.env.DB_URL, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
 // Config apps
-mongoose.connect("mongodb://localhost/Citydb", { useNewUrlParser: true, useUnifiedTopology: true });
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -26,17 +33,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser(function (user, done) {
   done(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+passport.deserializeUser(function (id, done) {
+  User.findById(id, function (err, user) {
     done(err, user);
   });
 });
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.locals.currentUser = req.user;
   next();
 });
@@ -47,10 +54,11 @@ app.use("/cities/:id/comments", citycommentRoutes);
 app.use("/cities/:id/sights", sightRoutes);
 app.use("/cities/:id/sights/:sight_id/comments", sightcommentRoutes);
 
-app.get("*", function(req, res) {
+app.get("*", function (req, res) {
   res.send("You entered a wrong path, please return to the homepage");
 });
 
-const port = process.env.port || 3000;
-app.listen(port);
-console.log("server is now live and listening at port: " + port);
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log("Server now live and listening on " + port);
+});
