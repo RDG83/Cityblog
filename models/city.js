@@ -5,6 +5,7 @@ const citySchema = new mongoose.Schema({
   image: String,
   country: String,
   description: String,
+  population: Number,
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
